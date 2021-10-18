@@ -1,0 +1,10 @@
+INSERT INTO resource_likes (user_id, resource_id, rating) VALUES (
+INSERT INTO resource_likes (user_id, resource_id, rating) VALUES (
+INSERT INTO resource_likes (user_id, resource_id, rating) VALUES (
+INSERT INTO resource_likes (user_id, resource_id, rating) VALUES (
+INSERT INTO resource_likes (user_id, resource_id, rating) VALUES (
+INSERT INTO resource_likes (user_id, resource_id, rating) VALUES (
+INSERT INTO resource_likes (user_id, resource_id, rating) VALUES (
+INSERT INTO resource_likes (user_id, resource_id, rating) VALUES (
+INSERT INTO resource_likes (user_id, resource_id, rating) VALUES (
+INSERT INTO resource_likes (user_id, resource_id, rating) VALUES (
