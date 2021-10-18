@@ -17,16 +17,16 @@ CREATE TABLE users (
 CREATE TABLE resources (
   id SERIAL PRIMARY KEY NOT NULL,
   title VARCHAR(255) NOT NULL,
+  description TEXT,
   thumbnail_photo_url VARCHAR(255) NOT NULL,
   cover_photo_url VARCHAR(255) NOT NULL,
   topic VARCHAR(255) NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  active BOOLEAN NOT NULL DEFAULT TRUE
+  creation_date DATE
 );
 
 CREATE TABLE comments (
   id SERIAL PRIMARY KEY NOT NULL,
-  start_date DATE NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   resource_id INTEGER REFERENCES resources(id) ON DELETE CASCADE,
   comment TEXT,
@@ -37,13 +37,11 @@ CREATE TABLE resource_rates (
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   resource_id INTEGER REFERENCES resources(id) ON DELETE CASCADE,
   rating SMALLINT NOT NULL DEFAULT 0,
-  message TEXT
 );
 
 CREATE TABLE resource_likes (
   id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   resource_id INTEGER REFERENCES resources(id) ON DELETE CASCADE,
-  likes SMALLINT NOT NULL DEFAULT 0,
-  message TEXT
+  like SMALLINT NOT NULL DEFAULT 0,
 );
