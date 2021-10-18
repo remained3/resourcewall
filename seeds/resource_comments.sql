@@ -1,0 +1,10 @@
+INSERT INTO resource_comments (id, user_id, resource_id, comment) VALUES (1, 1, 2, 'wow');
+INSERT INTO resource_comments (id, user_id, resource_id, comment) VALUES (2, 2, 2, 'amazing');
+INSERT INTO resource_comments (id, user_id, resource_id, comment) VALUES (3, 3, 3, 'awesome');
+INSERT INTO resource_comments (id, user_id, resource_id, comment) VALUES (4, 4, 4, 'cant wait for this game release');
+INSERT INTO resource_comments (id, user_id, resource_id, comment) VALUES (5, 5, 5, 'I love this song');
+INSERT INTO resource_comments (id, user_id, resource_id, comment) VALUES (6, 6, 6, 'so cool');
+INSERT INTO resource_comments (id, user_id, resource_id, comment) VALUES (7, 7, 7, 'Ive been looking for a new routine... this is perfect');
+INSERT INTO resource_comments (id, user_id, resource_id, comment) VALUES (8, 8, 8, 'adding this location to my bucket list');
+INSERT INTO resource_comments (id, user_id, resource_id, comment) VALUES (9, 9, 9, 'delicious! I will be trying this recipe later today');
+INSERT INTO resource_comments (id, user_id, resource_id, comment) VALUES (10, 10, 10, 'This is my favourite makeup tutorial!!');
