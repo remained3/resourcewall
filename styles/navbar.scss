@@ -19,3 +19,27 @@ a {
   background-color: transparent;
 }
 
+.greeting {
+  display: inline;
+}
+
+.buttons button {
+  display: inline;
+  background-color: rosybrown;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  font-size: 1em;
+}
+
+.logged-in {
+  display: none;
+}
+
+.logged-in .logged-in {
+  display: block;
+}
+
+.logged-in .logged-out {
+  display: none;
+}
