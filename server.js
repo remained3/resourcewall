@@ -7,7 +7,11 @@ const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
-
+/******* Helper Functions *******/
+const { findUserByEmail } = require("./helperFunction");
+const { generateRandomString } = require("./helperFunction");
+const { authenticateUser } = require("./helperFunction");
+const { createUser } = require("./helperFunction");
 // PG database client/connection setup
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
@@ -36,12 +40,18 @@ app.use(express.static("public"));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
-const widgetsRoutes = require("./routes/widgets");
+const likesRoutes = require("./routes/likes");
+const ratesRoutes = require("./routes/rates");
+const commentsRoutes = require("./routes/comments");
+const resourcesRoutes = require("./routes/resources");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
+app.use("/api/likes", likesRoutes(db));
+app.use("/api/rates", ratesRoutes(db));
+app.use("/api/comments", commentsRoutes(db));
+app.use("/api/resources", resourcesRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -50,6 +60,31 @@ app.use("/api/widgets", widgetsRoutes(db));
 
 app.get("/", (req, res) => {
   res.render("index");
+});
+
+/*********** LOGIN ************/
+app.get("/login", (req, res) => {
+  const templateVars = {
+    username: null
+  };
+  res.render('login', templateVars);
+});
+
+app.post("/login", (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  const username = authenticateUser(users, email, password);
+  if (username.user) {
+    req.session.user_id = username.user.id;
+    return res.redirect("/urls");
+  }
+  res.status(400).send('Incorrect password or email');
+});
+/*********** REGISTER ************/
+app.get("/register", (req, res) => {  const templateVars = {
+  username: null
+};
+res.render("register", templateVars);
 });
 
 app.listen(PORT, () => {
