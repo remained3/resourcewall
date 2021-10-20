@@ -58,6 +58,8 @@ app.use("/api/resources", resourcesRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
+const users = usersRoutes(db);
+
 app.get("/", (req, res) => {
   res.render("index");
 });
@@ -80,11 +82,33 @@ app.post("/login", (req, res) => {
   }
   res.status(400).send('Incorrect password or email');
 });
+/*********** LOGOUT ************/
+app.post("/logout", (req, res) => {
+  req.session = null;
+  res.redirect("index");
+});
+
 /*********** REGISTER ************/
 app.get("/register", (req, res) => {  const templateVars = {
   username: null
 };
 res.render("register", templateVars);
+});
+
+app.post("/register", (req, res) => {
+  const email = req.body.email;
+  if (!email || !req.body.password) {
+    return res.status(400).send('Missing information');
+  }
+  const userFound = findUserByEmail(email, users);
+  if (userFound) {
+    res.status(400).send('User already exists');
+  }
+  const salt = bcrypt.genSaltSync(10);
+  const password = bcrypt.hashSync(req.body.password, salt);
+  const userId = createUser(email, password, users);
+  req.session.user_id = userId;
+  res.redirect('index');
 });
 
 app.listen(PORT, () => {
