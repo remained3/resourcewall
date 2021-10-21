@@ -71,8 +71,21 @@ app.get("/addResource", (req, res) => {
 
 /*********** ADD RESOURCE ************/
 app.post("/addResource", (req, res) => {
-  res.render("addResource");
-});
+  const details = {
+    title: req.body.title,
+    description: req.body.description,
+    thumbnail_photo_url: req.body.thumbnail_photo_url,
+    cover_photo_url: req.body.cover_photo_url,
+    topic: req.body.topic
+  }
+  let query = 'INSERT [title, description, thumbnail_photo_url, cover_photo_url, topic] INTO resources';
+  console.log(query)
+  db.query(query, details, (err, res) => {
+    if(err) throw err;
+  })
+  res.redirect("resourceList", templateVars);
+})
+
 
 /*********** RESOURCE LIST************/
 
@@ -93,6 +106,29 @@ app.get("/resourceList", (req, res) => {
         .json({ error: err.message });
     });
 });
+
+/************My Resources********/
+app.get("/myResources", (req, res) => {
+  let query = (`SELECT * FROM resources
+  JOIN users ON users.id = user_id
+  WHERE user_id = $1`, [user_id]);
+  console.log(query);
+  db.query(query)
+    .then(data => {
+      const resources = data.rows;
+      const templateVars = {
+        resources
+      }
+      res.render("myResources", templateVars);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
+
+
 
 /*********** LOGIN ************/
 app.get("/login", (req, res) => {
