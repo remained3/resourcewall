@@ -83,10 +83,25 @@ app.get("/addResource", (req, res) => {
 });
 
 /*********** ADD RESOURCE ************/
-app.post("/addResource", (req, res) => {
-    console.log(req.body)
-   res.redirect("resourceList");
-})
+app.post("/addResource/:resource", (req, res) => {
+    let query = `INSERT INTO resources (title, description, thumbnail_photo_url, cover_photo_url, topic)
+    VALUES (req.body.title, req.body.description, req.body.thumbnail_photo_url, req.body.cover_photo_url, req.body.topic);`
+    console.log(query);
+    db.query(query)
+      .then(data => {
+        const resources = data.rows;
+        const templateVars = {
+          resources
+        }
+        res.redirect("resourceList");
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
 
 /*********** RESOURCE LIST************/
 //use template my resouces
