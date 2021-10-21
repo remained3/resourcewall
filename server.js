@@ -156,6 +156,16 @@ app.get("/register", (req, res) => {  const templateVars = {
 res.render("register", templateVars);
 });
 
+/*********** PROFILE ************/
+app.get("/profile", (req, res) => {
+  res.render("profile");
+});
+
+/*********** PROFILE ************/
+app.post("/profile", (req, res) => {
+  res.render("profile");
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
