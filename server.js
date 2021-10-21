@@ -64,10 +64,16 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+/*********** ADD RESOURCE ************/
 app.get("/addResource", (req, res) => {
   res.render("/addResource");
-})
+});
 
+/*********** RESOURCE LIST************/
+
+app.get("/resourceList", (req, res) => {
+  res.render("resourceList");
+});
 
 /*********** LOGIN ************/
 app.get("/login", (req, res) => {
