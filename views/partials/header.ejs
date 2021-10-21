@@ -11,16 +11,23 @@
     <span class="logo"><a href ='/'>Resource Wall</a></span>
     <span class="greeting">Hello User</span>
     <div class="buttons">
-      <button class="add-resource" type="submit">Add Resource</button>
+      <form class="form-inline" method="GET" action = "/addResource">
+        <div class="form-group">
+        <button type="submit" class="btn btn-outline-dark">Add Resource</button> </div></form>
       <button class="my-resources" type="submit">My Resources</button>
       <button class="my-profile" type="submit">My Profile</button>
     </div>
     <div class="logged-out">
-      <button class="register" type="submit">Register</button>
+      <form class="form-inline" method="GET" action = "/register">
+        <div class="form-group">
+      <button class="register" type="submit">Register</button></div></form>
+      <form class="form-inline" method="GET" action = "/login"></form>
       <button class="login" type="submit">Login</button>
     </div>
     <div class="logged-in">
-      <button class="logout" type="submit">Logout</button>
+      <form class="form-inline" method="GET" action = "/">
+        <div class="form-group">
+      <button class="logout" type="submit">Logout</button></div></form>
     </div>
   </nav>
 </header
