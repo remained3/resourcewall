@@ -71,19 +71,8 @@ app.get("/addResource", (req, res) => {
 
 /*********** ADD RESOURCE ************/
 app.post("/addResource", (req, res) => {
-  const details = {
-    title: req.body.title,
-    description: req.body.description,
-    thumbnail_photo_url: req.body.thumbnail_photo_url,
-    cover_photo_url: req.body.cover_photo_url,
-    topic: req.body.topic
-  }
-  let query = 'INSERT [title, description, thumbnail_photo_url, cover_photo_url, topic] INTO resources';
-  console.log(query)
-  db.query(query, details, (err, res) => {
-    if(err) throw err;
-  })
-  res.redirect("resourceList", templateVars);
+    console.log(req.body)
+   res.redirect("resourceList");
 })
 
 
