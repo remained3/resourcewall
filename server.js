@@ -128,8 +128,6 @@ app.get("/myResources", (req, res) => {
     });
 });
 
-
-
 /*********** LOGIN ************/
 app.get("/login", (req, res) => {
   const templateVars = {
