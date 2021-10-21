@@ -69,7 +69,22 @@ app.get("/", (req, res) => {
 
 /*********** VIEW RESOURCE ************/
 app.get("/resources/:resource_id", (req, res) => {
-  res.render("addResource");
+  // TODO: get resource id from url
+  let query = `SELECT * FROM resources WHERE id = 1`;
+  console.log(query);
+  db.query(query)
+    .then(data => {
+      const resources = data.rows;
+      const templateVars = {
+        resources
+      }
+      res.render("viewResource", templateVars);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
 });
 
 /*********** EDIT RESOURCE ************/
