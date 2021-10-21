@@ -66,7 +66,7 @@ app.get("/", (req, res) => {
 
 /*********** ADD RESOURCE ************/
 app.get("/addResource", (req, res) => {
-  res.render("/addResource");
+  res.render("addResource");
 });
 
 /*********** RESOURCE LIST************/
@@ -83,16 +83,11 @@ app.get("/login", (req, res) => {
   res.render('login', templateVars);
 });
 
-app.post("/login", (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
-  const username = authenticateUser(users, email, password);
-  if (username.user) {
-    req.session.user_id = username.user.id;
-    return res.redirect("/urls");
-  }
-  res.status(400).send('Incorrect password or email');
+app.get("/login/:userId", (req, res) => {
+  res.cookie("userId", req.params.userId)
+  res.redirect("/")
 });
+
 /*********** LOGOUT ************/
 app.post("/logout", (req, res) => {
   req.session = null;
@@ -105,23 +100,6 @@ app.get("/register", (req, res) => {  const templateVars = {
 };
 res.render("register", templateVars);
 });
-
-app.post("/register", (req, res) => {
-  const email = req.body.email;
-  if (!email || !req.body.password) {
-    return res.status(400).send('Missing information');
-  }
-  const userFound = findUserByEmail(email, users);
-  if (userFound) {
-    res.status(400).send('User already exists');
-  }
-  const salt = bcrypt.genSaltSync(10);
-  const password = bcrypt.hashSync(req.body.password, salt);
-  const userId = createUser(email, password, users);
-  req.session.user_id = userId;
-  res.redirect('index');
-});
-
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
