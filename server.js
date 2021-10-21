@@ -64,6 +64,19 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+// SELECT DISTINCT topic FROM resources;
+
+
+/*********** VIEW RESOURCE ************/
+app.get("/resources/:resource_id", (req, res) => {
+  res.render("addResource");
+});
+
+/*********** EDIT RESOURCE ************/
+app.get("/resources/:resource_id/edit", (req, res) => {
+  res.render("addResource");
+});
+
 /*********** ADD RESOURCE ************/
 app.get("/addResource", (req, res) => {
   res.render("addResource");
@@ -75,8 +88,8 @@ app.post("/addResource", (req, res) => {
    res.redirect("resourceList");
 })
 
-
 /*********** RESOURCE LIST************/
+//use template my resouces
 
 app.get("/resourceList", (req, res) => {
   let query = `SELECT * FROM resources`;
@@ -98,7 +111,21 @@ app.get("/resourceList", (req, res) => {
 
 /************My Resources********/
 app.get("/myResources", (req, res) => {
+  let query = `SELECT * FROM resources WHERE user_id = 1`;
+  console.log(query);
+  db.query(query)
+    .then(data => {
+      const resources = data.rows;
+      const templateVars = {
+        resources
+      }
       res.render("myResources", templateVars);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
 });
 
 /*********** LOGIN ************/

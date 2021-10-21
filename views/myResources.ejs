@@ -13,9 +13,7 @@
   </header>
     <main style="margin: 1em;">
       <h3>Resource List</h3>
-      <% for(const resource of resources){ %>
-       <p><%= resource.title %></p>
-      <% } %>
+
       <div class="form-group">
         <input class="search-bar" type="search" name="search" placeholder="Seach" style="width: 300px">
       </div>
@@ -95,47 +93,18 @@
 </html>
 
 <!-- Gallery -->
+
 <div class="row">
-  <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-    <img
-      src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(73).jpg"
-      class="w-100 shadow-1-strong rounded mb-4"
-      alt=""
-    />
+  <% for(const resource of resources){ %>
+    <div class="card">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title"><%= resource.title %></h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="/resources/<%= resource.id %>" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+   <% } %>
 
-    <img
-      src="https://mdbootstrap.com/img/Photos/Vertical/mountain1.jpg"
-      class="w-100 shadow-1-strong rounded mb-4"
-      alt=""
-    />
-  </div>
-
-  <div class="col-lg-4 mb-4 mb-lg-0">
-    <img
-      src="https://mdbootstrap.com/img/Photos/Vertical/mountain2.jpg"
-      class="w-100 shadow-1-strong rounded mb-4"
-      alt=""
-    />
-
-    <img
-      src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(73).jpg"
-      class="w-100 shadow-1-strong rounded mb-4"
-      alt=""
-    />
-  </div>
-
-  <div class="col-lg-4 mb-4 mb-lg-0">
-    <img
-      src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg"
-      class="w-100 shadow-1-strong rounded mb-4"
-      alt=""
-    />
-
-    <img
-      src="https://mdbootstrap.com/img/Photos/Vertical/mountain3.jpg"
-      class="w-100 shadow-1-strong rounded mb-4"
-      alt=""
-    />
-  </div>
 </div>
 <!-- Gallery -->
