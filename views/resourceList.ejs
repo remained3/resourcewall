@@ -13,6 +13,9 @@
   </header>
     <main style="margin: 1em;">
       <h3>Resource List</h3>
+      <% for(const resource of resources){ %>
+       <p><%= resource.title %></p>
+      <% } %>
       <div class="form-group">
         <input class="search-bar" type="search" name="search" placeholder="Seach" style="width: 300px">
       </div>

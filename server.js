@@ -69,10 +69,29 @@ app.get("/addResource", (req, res) => {
   res.render("addResource");
 });
 
+/*********** ADD RESOURCE ************/
+app.post("/addResource", (req, res) => {
+  res.render("addResource");
+});
+
 /*********** RESOURCE LIST************/
 
 app.get("/resourceList", (req, res) => {
-  res.render("resourceList");
+  let query = `SELECT * FROM resources`;
+  console.log(query);
+  db.query(query)
+    .then(data => {
+      const resources = data.rows;
+      const templateVars = {
+        resources
+      }
+      res.render("resourceList", templateVars);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
 });
 
 /*********** LOGIN ************/
