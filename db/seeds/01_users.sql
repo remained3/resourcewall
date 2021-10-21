@@ -1,3 +1,10 @@
--- Users table seeds here (Example)
-INSERT INTO users (name) VALUES ('Alice');
-INSERT INTO users (name) VALUES ('Kira');
+INSERT INTO users (id, name, email, phone, password, start_date, active) VALUES (1, 'Salvador Dali', 'dali@gmail.com', '778-125-2216', 'password', '2021-02-12T08:00:00.000Z', true);
+INSERT INTO users (id, name, email, phone, password, start_date, active) VALUES (2, 'Freddy Krueger', 'halloween@gmail.com', '860-831-0563','password', '2018-09-12T08:00:00.000Z', true);
+INSERT INTO users (id, name, email, phone, password, start_date, active) VALUES (3, 'Tim Hortons', 'ilovecoffee@gmail.com', '604-094-6464','password', '2018-04-12T08:00:00.000Z', false);
+INSERT INTO users (id, name, email, phone, password, start_date, active) VALUES (4, 'Clark Kent', 'superman@gmail.com', '070-187-6147','password', '2020-02-12T08:00:00.000Z', true);
+INSERT INTO users (id, name, email, phone, password, start_date, active) VALUES (5, 'Diana Prince', 'wwoman@hotmail.com', '064-902-7188','password', '2017-05-12T08:00:00.000Z', true);
+INSERT INTO users (id, name, email, phone, password, start_date, active) VALUES (6, 'Peter Parker', 'spiders@yahoo.com', '099-380-3924','password', '2019-02-10T08:00:00.000Z', true);
+INSERT INTO users (id, name, email, phone, password, start_date, active) VALUES (7, 'Ororo Munroe', 'storm@gmail.com', '525-030-8297','password', '2021-03-11T07:00:00.000Z', false);
+INSERT INTO users (id, name, email, phone, password, start_date, active) VALUES (8, 'Bruce Wayne', 'batman@gmail.com', '778-988-9555','password', '2016-06-12T07:00:00.000Z', true);
+INSERT INTO users (id, name, email, phone, password, start_date, active) VALUES (9, 'Natasha Romanoff', 'blackwidow@gmail.com', '778-023-9682','password', '2000-07-08T07:00:00.000Z', true);
+INSERT INTO users (id, name, email, phone, password, start_date, active) VALUES (10, 'Tony Stark', 'ironman@gmail.com', '341-332-8341','password', '2012-04-09T07:00:00.000Z', true);

@@ -64,6 +64,11 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.get("/addResource", (req, res) => {
+  res.render("/addResource");
+})
+
+
 /*********** LOGIN ************/
 app.get("/login", (req, res) => {
   const templateVars = {
@@ -110,6 +115,7 @@ app.post("/register", (req, res) => {
   req.session.user_id = userId;
   res.redirect('index');
 });
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
