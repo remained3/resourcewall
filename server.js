@@ -146,13 +146,27 @@ res.render("register", templateVars);
 });
 
 /*********** PROFILE ************/
-app.get("/profile", (req, res) => {
-  res.render("profile");
+app.get("/myProfile", (req, res) => {
+  let query = (`SELECT * FROM users`);
+  console.log(query);
+  db.query(query)
+    .then(data => {
+      const resources = data.rows;
+      const templateVars = {
+        resources
+      }
+      res.render("myProfile", templateVars);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
 });
 
 /*********** PROFILE ************/
-app.post("/profile", (req, res) => {
-  res.render("profile");
+app.post("/myProfile", (req, res) => {
+  res.render("myProfile");
 });
 
 app.listen(PORT, () => {
