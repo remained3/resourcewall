@@ -98,23 +98,7 @@ app.get("/resourceList", (req, res) => {
 
 /************My Resources********/
 app.get("/myResources", (req, res) => {
-  let query = (`SELECT * FROM resources
-  JOIN users ON users.id = user_id
-  WHERE user_id = $1`, [user_id]);
-  console.log(query);
-  db.query(query)
-    .then(data => {
-      const resources = data.rows;
-      const templateVars = {
-        resources
-      }
       res.render("myResources", templateVars);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
 });
 
 
