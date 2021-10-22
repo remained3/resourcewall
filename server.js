@@ -70,7 +70,6 @@ app.get("/", (req, res) => {
 
 /*********** VIEW RESOURCE ************/
 app.get("/resources/:resource_id", (req, res) => {
-  // TODO: get resource id from url
   let query = `SELECT * FROM resources WHERE resources.id = ${req.params.resource_id}`;
   db.query(query)
     .then(data => {
@@ -89,7 +88,36 @@ app.get("/resources/:resource_id", (req, res) => {
 
 /*********** EDIT RESOURCE ************/
 app.get("/resources/:resource_id/edit", (req, res) => {
-  res.render("addResource");
+  let query = `SELECT * FROM resources WHERE resources.id = ${req.params.resource_id}`;
+  db.query(query)
+    .then(data => {
+      const resources = data.rows[0];
+      const templateVars = {
+        resources
+      }
+      res.render("editResource", templateVars);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
+
+/*********** EDIT RESOURCE, POST ************/
+app.post("/editResource", (req, res) => {
+  let query = "UPDATE resources SET title=$1, description=$2, thumbnail_photo_url=$3, cover_photo_url=$4, topic=$5 WHERE id = $6 RETURNING id";
+  db.query(query,
+    [req.body.title, req.body.description, req.body.thumbnail_photo_url, req.body.cover_photo_url, req.body.topic, req.body.resource_id])
+    .then(data => {
+      const resource = data.rows[0];
+      res.redirect(`resources/${resource.id}`);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
 });
 
 /*********** ADD RESOURCE ************/
