@@ -18,17 +18,27 @@
     </header>
     <!-- Resource card -->
     <div class="row">
-      <% for(const resource of resources){ %>
-        <div class="card">
-          <img src="<%= resource.thumbnail_photo_url %>" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title"><%= resource.title %></h5>
-            <p class="card-text"><%= resource.description %></p>
-            <a href="/resources/<%= resource.id %>/edit" class="btn btn-primary">Edit</a>
-          </div>
+
+      <div class="card">
+        <img src="<%= resources[0].thumbnail_photo_url %>" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"><%= resources[0].title %></h5>
+          <p class="card-text"><%= resources[0].description %></p>
+          <a href="/resources/<%= resources[0].id %>/edit" class="btn btn-primary">Edit</a>
         </div>
+      </div>
+
+    </div>
+    <!-- Resource card -->
+    <!-- Comments -->
+    <div>
+      <span>Comments:</span>
+      <br>
+      <% for(const resource of resources){ %>
+        <span>COMMENT: <%= resource.comment %></span>
+        <br>
       <% } %>
     </div>
-  <!-- Resource card -->
+    <!-- Comments -->
   </body>
 </html>

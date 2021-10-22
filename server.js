@@ -70,7 +70,7 @@ app.get("/", (req, res) => {
 /*********** VIEW RESOURCE ************/
 app.get("/resources/:resource_id", (req, res) => {
   // TODO: get resource id from url
-  let query = `SELECT * FROM resources WHERE id = 1`;
+  let query = `SELECT * FROM resources, resource_comments WHERE resources.id = 2 AND resources.id = resource_comments.resource_id`;
   console.log(query);
   db.query(query)
     .then(data => {
