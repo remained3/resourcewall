@@ -44,6 +44,7 @@ const likesRoutes = require("./routes/likes");
 const ratesRoutes = require("./routes/rates");
 const commentsRoutes = require("./routes/comments");
 const resourcesRoutes = require("./routes/resources");
+const { response } = require("express");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -98,16 +99,12 @@ app.get("/addResource", (req, res) => {
 });
 
 /*********** ADD RESOURCE ************/
-app.post("/addResource/:resource", (req, res) => {
-    let query = `INSERT INTO resources (title, description, thumbnail_photo_url, cover_photo_url, topic)
-    VALUES (req.body.title, req.body.description, req.body.thumbnail_photo_url, req.body.cover_photo_url, req.body.topic);`
+app.post("/addNewResource", (req, res) => {
+  let query = `INSERT INTO resources (title, description, thumbnail_photo_url, cover_photo_url, topic)
+  VALUES ('${req.body.title}', '${req.body.description}', '${req.body.thumbnail_photo_url}', '${req.body.cover_photo_url}', '${req.body.topic}') RETURNING id;`
     console.log(query);
     db.query(query)
       .then(data => {
-        const resources = data.rows;
-        const templateVars = {
-          resources
-        }
         res.redirect("resourceList");
       })
       .catch(err => {
