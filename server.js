@@ -86,11 +86,10 @@ app.get("/addResource", (req, res) => {
 /*********** ADD RESOURCE ************/
 app.post("/addNewResource", (req, res) => {
   let query = `INSERT INTO resources (title, description, thumbnail_photo_url, cover_photo_url, topic)
-  VALUES ('${req.body.title}', '${req.body.description}', '${req.body.thumbnail_photo_url}', '${req.body.cover_photo_url}', '${req.body.topic}');`
+  VALUES ('${req.body.title}', '${req.body.description}', '${req.body.thumbnail_photo_url}', '${req.body.cover_photo_url}', '${req.body.topic}') RETURNING id;`
     console.log(query);
     db.query(query)
       .then(data => {
-      response.json(data)
         res.redirect("resourceList");
       })
       .catch(err => {
@@ -99,6 +98,7 @@ app.post("/addNewResource", (req, res) => {
           .json({ error: err.message });
       });
   });
+
 
 /*********** RESOURCE LIST************/
 //use template my resouces
