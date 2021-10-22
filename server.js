@@ -83,13 +83,14 @@ app.get("/", (req, res) => {
 
 /*********** VIEW RESOURCE ************/
 app.get("/resources/:resource_id", (req, res) => {
-  let query = `SELECT * FROM resources WHERE resources.id = ${req.params.resource_id}`;
+  let query = `SELECT * FROM resources, users WHERE resources.id = ${req.params.resource_id} AND users.id = resources.id`;
   db.query(query)
     .then(data => {
       const resources = data.rows[0];
       const templateVars = {
         resources
       }
+      console.log(data.rows);
       res.render("viewResource", templateVars);
     })
     .catch(err => {

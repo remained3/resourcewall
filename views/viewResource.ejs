@@ -19,10 +19,12 @@
     <!-- Resource card -->
     <div class="container">
       <div class="row">
-        <div class="card" style="width: 20rem;">
+        <div class="card" style="width: 40rem; margin: 10px auto 10px auto;">
           <img src="<%= resources.thumbnail_photo_url %>" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title"><%= resources.title %></h5>
+            <h6 class="card-subtitle mb-2 text-muted"><%= resources.creation_date %></h6>
+            <h6 class="card-subtitle mb-2 text-muted"><%= resources.name %></h6>
             <p class="card-text"><%= resources.description %></p>
             <a href="/resources/<%= resources.id %>/edit" class="btn btn-primary">Edit</a>
           </div>
