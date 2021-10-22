@@ -62,7 +62,20 @@ app.use("/api/resources", resourcesRoutes(db));
 const users = usersRoutes(db);
 
 app.get("/", (req, res) => {
-  res.render("index");
+  let query = `SELECT * FROM resources`;
+  db.query(query)
+    .then(data => {
+      const resources = data.rows;
+      const templateVars = {
+        resources
+      }
+      res.render("index", templateVars);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
 });
 
 // SELECT DISTINCT topic FROM resources;
