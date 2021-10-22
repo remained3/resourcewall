@@ -90,7 +90,6 @@ app.get("/resources/:resource_id", (req, res) => {
       const templateVars = {
         resources
       }
-      console.log(data.rows);
       res.render("viewResource", templateVars);
     })
     .catch(err => {
