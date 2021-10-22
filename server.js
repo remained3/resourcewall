@@ -146,15 +146,20 @@ app.post("/editResource", (req, res) => {
 
 /*********** ADD RESOURCE ************/
 app.get("/addResource", (req, res) => {
-  res.render("addResource");
+  if(req.cookies.userId) {
+    res.render("addResource");
+  } else {
+    res.redirect('/login');
+  }
 });
 
 /*********** ADD RESOURCE ************/
 app.post("/addNewResource", (req, res) => {
-  let query = `INSERT INTO resources (title, description, thumbnail_photo_url, cover_photo_url, topic)
-  VALUES ('${req.body.title}', '${req.body.description}', '${req.body.thumbnail_photo_url}', '${req.body.cover_photo_url}', '${req.body.topic}') RETURNING id;`
+  let query = `INSERT INTO resources (title, description, thumbnail_photo_url, cover_photo_url, topic, user_id)
+  VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;`
     console.log(query);
-    db.query(query)
+    db.query(query,
+      [req.body.title, req.body.description, req.body.thumbnail_photo_url, req.body.cover_photo_url, req.body.topic, req.cookies.userId])
       .then(data => {
         res.redirect("resourceList");
       })
