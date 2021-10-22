@@ -92,11 +92,10 @@
 </html>
 
 <!-- Gallery -->
-
 <div class="row">
   <% for(const resource of resources){ %>
-    <div class="card">
-      <img src="<...>" class="card-img-top" alt="..."><%= resource.cover_photo_url %>"</img>
+    <div class="card" style="width: 40rem; margin: 10px auto 10px auto;">
+      <img src="<%= resource.cover_photo_url %>" class="card-img-top">
       <div class="card-body">
         <h5 class="card-title"><%= resource.title %></h5>
         <p class="card-text"><%= resource.description %></p>
@@ -104,6 +103,5 @@
       </div>
     </div>
    <% } %>
-
 </div>
 <!-- Gallery -->
