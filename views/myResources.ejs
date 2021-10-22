@@ -74,8 +74,7 @@
               <div class="card-body">
                 <h5 class="card-title">FITNESS</h5>
                 <p class="card-text">
-                  Some quick example text to build on the card title and make up the bulk
-                  of the card's content.
+                  Browse through all of the latest health and fitness routines to add to your day. Great tips for any level on your journey to great health.Your healthy lifestyle starts here.
                 </p>
                 <a href="#!" class="btn btn-secondary">Browse</a>
               </div>
@@ -97,11 +96,11 @@
 <div class="row">
   <% for(const resource of resources){ %>
     <div class="card">
-      <img src="..." class="card-img-top" alt="...">
+      <img src="<...>" class="card-img-top" alt="..."><%= resource.cover_photo_url %>"</img>
       <div class="card-body">
         <h5 class="card-title"><%= resource.title %></h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="/resources/<%= resource.id %>" class="btn btn-primary">Go somewhere</a>
+        <p class="card-text"><%= resource.description %></p>
+        <a href="/resources/<%= resource.id %>" class="btn btn-secondary">Browse</a>
       </div>
     </div>
    <% } %>
