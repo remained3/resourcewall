@@ -8,10 +8,15 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 /******* Helper Functions *******/
-const { findUserByEmail } = require("./helperFunction");
-const { generateRandomString } = require("./helperFunction");
-const { authenticateUser } = require("./helperFunction");
-const { createUser } = require("./helperFunction");
+// const { findUserByEmail } = require("./helperFunction");
+// const { generateRandomString } = require("./helperFunction");
+// const { authenticateUser } = require("./helperFunction");
+// const { createUser } = require("./helperFunction");
+
+// Setup cookie parser
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
 // PG database client/connection setup
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
@@ -101,20 +106,26 @@ app.get("/resources/:resource_id", (req, res) => {
 
 /*********** EDIT RESOURCE ************/
 app.get("/resources/:resource_id/edit", (req, res) => {
-  let query = `SELECT * FROM resources WHERE resources.id = ${req.params.resource_id}`;
-  db.query(query)
-    .then(data => {
-      const resources = data.rows[0];
-      const templateVars = {
-        resources
-      }
-      res.render("editResource", templateVars);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
+
+  console.log(req.cookies.userId);
+  if(req.cookies.userId) {
+    let query = `SELECT * FROM resources WHERE resources.id = ${req.params.resource_id}`;
+    db.query(query)
+      .then(data => {
+        const resources = data.rows[0];
+        const templateVars = {
+          resources
+        }
+        res.render("editResource", templateVars);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  } else {
+    res.redirect('/login');
+  }
 });
 
 /*********** EDIT RESOURCE, POST ************/
