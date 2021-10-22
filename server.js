@@ -71,11 +71,10 @@ app.get("/", (req, res) => {
 /*********** VIEW RESOURCE ************/
 app.get("/resources/:resource_id", (req, res) => {
   // TODO: get resource id from url
-  let query = `SELECT * FROM resources, resource_comments WHERE resources.id = 2 AND resources.id = resource_comments.resource_id`;
-  console.log(query);
+  let query = `SELECT * FROM resources WHERE resources.id = ${req.params.resource_id}`;
   db.query(query)
     .then(data => {
-      const resources = data.rows;
+      const resources = data.rows[0];
       const templateVars = {
         resources
       }
@@ -111,6 +110,8 @@ app.post("/addNewResource", (req, res) => {
         res
           .status(500)
           .json({ error: err.message });
+
+        console.log(err);
       });
   });
 
