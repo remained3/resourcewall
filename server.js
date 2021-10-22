@@ -191,21 +191,25 @@ app.get("/resourceList", (req, res) => {
 
 /************My Resources********/
 app.get("/myResources", (req, res) => {
-  let query = `SELECT * FROM resources WHERE user_id = 1`;
-  console.log(query);
-  db.query(query)
-    .then(data => {
-      const resources = data.rows;
-      const templateVars = {
-        resources
-      }
-      res.render("myResources", templateVars);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
+  if(req.cookies.userId) {
+    let query = `SELECT * FROM resources WHERE user_id = 1`;
+    console.log(query);
+    db.query(query)
+      .then(data => {
+        const resources = data.rows;
+        const templateVars = {
+          resources
+        }
+        res.render("myResources", templateVars);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  } else {
+    res.redirect('/login');
+  }
 });
 
 /*********** LOGIN ************/
