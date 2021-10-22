@@ -13,9 +13,6 @@
   </header>
     <main style="margin: 1em;">
       <h3>Resource List</h3>
-      <% for(const resource of resources){ %>
-       <p><%= resource.title %></p>
-      <% } %>
       <div class="form-group">
         <input class="search-bar" type="search" name="search" placeholder="Seach" style="width: 300px">
       </div>
@@ -96,46 +93,15 @@
 
 <!-- Gallery -->
 <div class="row">
-  <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-    <img
-      src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(73).jpg"
-      class="w-100 shadow-1-strong rounded mb-4"
-      alt=""
-    />
-
-    <img
-      src="https://mdbootstrap.com/img/Photos/Vertical/mountain1.jpg"
-      class="w-100 shadow-1-strong rounded mb-4"
-      alt=""
-    />
-  </div>
-
-  <div class="col-lg-4 mb-4 mb-lg-0">
-    <img
-      src="https://mdbootstrap.com/img/Photos/Vertical/mountain2.jpg"
-      class="w-100 shadow-1-strong rounded mb-4"
-      alt=""
-    />
-
-    <img
-      src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(73).jpg"
-      class="w-100 shadow-1-strong rounded mb-4"
-      alt=""
-    />
-  </div>
-
-  <div class="col-lg-4 mb-4 mb-lg-0">
-    <img
-      src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg"
-      class="w-100 shadow-1-strong rounded mb-4"
-      alt=""
-    />
-
-    <img
-      src="https://mdbootstrap.com/img/Photos/Vertical/mountain3.jpg"
-      class="w-100 shadow-1-strong rounded mb-4"
-      alt=""
-    />
-  </div>
+  <% for(const resource of resources){ %>
+    <div class="card" style="width: 40rem; margin: 10px auto 10px auto;">
+      <img src="<%= resource.cover_photo_url %>" class="card-img-top">
+      <div class="card-body">
+        <h5 class="card-title"><%= resource.title %></h5>
+        <p class="card-text"><%= resource.description %></p>
+        <a href="/resources/<%= resource.id %>" class="btn btn-secondary">Browse</a>
+      </div>
+    </div>
+   <% } %>
 </div>
 <!-- Gallery -->
